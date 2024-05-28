@@ -119,9 +119,9 @@ class Player {
       } else if (adjustedScore >= 9) {
         b = bigRaise;
       } else if (adjustedScore >= 8) {
-        b = Math.min(smallRaise, me.stack / 5);
+        b = Math.min(smallRaise, Math.floor(me.stack / 5));
       } else if (adjustedScore >= 7) {
-        b = Math.min(call, me.stack / 5);
+        b = Math.min(call, Math.floor(me.stack / 5));
       }
       console.log('Early position bet', b);
       bet(b);
