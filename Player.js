@@ -78,10 +78,14 @@ class Player {
         return score;
       }
 
+      let betSize = Math.floor(me.stack / 2);
+      let mr = gameState.current_buy_in - me.bet + gameState.minimum_raise;
+      if(betSize < mr)
+        betSize = me.stack;
 
       if( otherLargeBet === 0 && late) {
       // if( otherLargeBet === 0) {
-        bet(10000);
+        bet(betSize);
         return;
       }
 
@@ -89,11 +93,11 @@ class Player {
 
       let adjustedScore = chenScore + countOutPlayers - otherAllIn * 2;
       if(late)
-        bet(adjustedScore >= 7 ? 10000 : 0);
+        bet(adjustedScore >= 7 ? betSize : 0);
       else if(mid)
-        bet(adjustedScore >= 9 ? 10000 : 0);
+        bet(adjustedScore >= 9 ? betSize : 0);
       else
-        bet(adjustedScore >= 10 ? 10000 : 0);
+        bet(adjustedScore >= 10 ? betSize : 0);
     } catch (e) {
       console.error(e);
       bet(0);
