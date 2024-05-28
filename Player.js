@@ -19,13 +19,18 @@ class Player {
   }
 
   static betRequest(gameState, bet) {
-    let me = gameState.players[gameState.in_action];
-    let holeCards = me.hole_cards;
-    let isPair = holeCards[0].rank === holeCards[1].rank;
-    holeCards[0].value = Player.toValue(holeCards[0].rank);
-    holeCards[1].value = Player.toValue(holeCards[1].rank);
-    let highestCard = Math.max(holeCards[0].value, holeCards[1].value);
-    bet(isPair && highestCard > 10 ? 10000 : 0);
+    try {
+      let me = gameState.players[gameState.in_action];
+      let holeCards = me.hole_cards;
+      let isPair = holeCards[0].rank === holeCards[1].rank;
+      holeCards[0].value = Player.toValue(holeCards[0].rank);
+      holeCards[1].value = Player.toValue(holeCards[1].rank);
+      let highestCard = Math.max(holeCards[0].value, holeCards[1].value);
+      bet(isPair && highestCard > 10 ? 10000 : 0);
+    } catch (e) {
+      console.error(e);
+      bet(0);
+    }
   }
 
   static showdown(gameState) {
