@@ -40,10 +40,6 @@ class Player {
       let communityMatchingLow = gameState.comunity_cards.filter(card => toValue(card.rank) === lowestCard).length;
 
       function calculateChenScore(holeCards) {
-        let card1 = Player.toValue(holeCards[0].rank);
-        let card2 = Player.toValue(holeCards[1].rank);
-        let highestCard = Math.max(card1, card2);
-        let lowestCard = Math.min(card1, card2);
         let isPair = card1 === card2;
         let isSuited = holeCards[0].suit === holeCards[1].suit;
         let gap = highestCard - lowestCard;
