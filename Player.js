@@ -28,9 +28,9 @@ class Player {
       let highestCard = Math.max(holeCards[0].value, holeCards[1].value);
       let countOutPlayers = gameState.players.filter(player => player.status === 'out').length;
       if(countOutPlayers === 1) {
-        bet(isPair && (highestCard > 8) ? 10000 : 0);
+        bet(isPair && (highestCard > 6) ? 10000 : 0);
       } else {
-        bet(isPair && (highestCard > 12) ? 10000 : 0);
+        bet(isPair && (highestCard > 8) ? 10000 : 0);
       }
     } catch (e) {
       console.error(e);
