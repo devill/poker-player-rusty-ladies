@@ -85,7 +85,8 @@ class Player {
 
       if( otherLargeBet === 0 && late) {
       // if( otherLargeBet === 0) {
-        bet(betSize);
+        console.log('Late position all in')
+        bet(10000);
         return;
       }
 
@@ -93,11 +94,23 @@ class Player {
 
       let adjustedScore = chenScore + countOutPlayers - otherAllIn;
       if(late)
-        bet(adjustedScore >= 7 ? betSize : 0);
+        {
+          let b = adjustedScore >= 7 ? betSize : 0;
+          console.log('Late position bet', b);
+          bet(b);
+        }
       else if(mid)
-        bet(adjustedScore >= 9 ? betSize : 0);
+        {
+          let b = adjustedScore >= 9 ? betSize : 0;
+          console.log('Mid position bet', b);
+          bet(b);
+        }
       else
-        bet(adjustedScore >= 10 ? betSize : 0);
+        {
+          let b = adjustedScore >= 10 ? betSize : 0;
+          console.log('Early position bet', b);
+          bet(b);
+        }
     } catch (e) {
       console.error(e);
       bet(0);
