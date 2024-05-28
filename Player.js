@@ -26,7 +26,7 @@ class Player {
       let countOutPlayers = gameState.players.filter(player => player.status === 'out').length;
       let mid = (gameState.dealer + 1 + countOutPlayers) === gameState.in_action;
       let late = (gameState.dealer + 2 + countOutPlayers) === gameState.in_action;
-      let otherAllIn = gameState.players.filter(player =>  player.name !== me.name && player.stack === 0 && player.status === 'active').length;
+      //let otherAllIn = gameState.players.filter(player => player.name !== me.name && player.stack === 0 && player.status === 'active').length;
       let otherLargeBet = gameState.players.filter(player => player.name !== me.name && gameState.stack < player.bet && player.status === 'active').length;
       let meLargeBet = me.stack < me.bet ? 1 : 0;
 
@@ -36,10 +36,10 @@ class Player {
       let highestCard = Math.max(card1, card2);
       let lowestCard = Math.min(card1, card2);
 
-      let communityMatchingHigh = gameState.comunity_cards.filter(card => toValue(card.rank) === highestCard).length;
-      let communityMatchingLow = gameState.comunity_cards.filter(card => toValue(card.rank) === lowestCard).length;
-      let card1MatchingSuite = gameState.comunity_cards.filter(card => card.suite === holeCards[0].suite).length;
-      let card2MatchingSuite = gameState.comunity_cards.filter(card => card.suite === holeCards[1].suite).length;
+      let communityMatchingHigh = gameState.community_cards.filter(card => toValue(card.rank) === highestCard).length;
+      let communityMatchingLow = gameState.community_cards.filter(card => toValue(card.rank) === lowestCard).length;
+      let card1MatchingSuite = gameState.community_cards.filter(card => card.suite === holeCards[0].suite).length;
+      let card2MatchingSuite = gameState.community_cards.filter(card => card.suite === holeCards[1].suite).length;
 
       function calculateChenScore(holeCards) {
         let isPair = card1 === card2;
@@ -88,15 +88,15 @@ class Player {
 
       let bigRaise = Math.floor(me.stack / 2);
       let mr = gameState.current_buy_in - me.bet + gameState.minimum_raise;
-      if(bigRaise < mr)
+      if (bigRaise < mr)
         bigRaise = me.stack;
 
       let smallRaise = gameState.current_buy_in - me.bet + gameState.minimum_raise;
       let call = gameState.current_buy_in - me.bet;
 
 
-      if( otherLargeBet === 0 && late) {
-      // if( otherLargeBet === 0) {
+      if (otherLargeBet === 0 && late) {
+        // if( otherLargeBet === 0) {
         console.log('Late position all in')
         bet(10000);
         return;
@@ -105,7 +105,7 @@ class Player {
       let chenScore = calculateChenScore(holeCards);
 
       let positionalAdjustment = 0;
-      if(late) {
+      if (late) {
         positionalAdjustment = 3;
       } else if (mid) {
         positionalAdjustment = 1;
@@ -114,7 +114,9 @@ class Player {
       let adjustedScore = chenScore + countOutPlayers - otherLargeBet + meLargeBet + communityMatchingHigh + communityMatchingLow + positionalAdjustment + card1MatchingSuite + card2MatchingSuite;
 
       let b = 0;
-      if (adjustedScore >= 9) {
+      if (adjustedScore >= 11) {
+        b = 10000;
+      } else if (adjustedScore >= 9) {
         b = bigRaise;
       } else if (adjustedScore >= 8) {
         b = Math.min(smallRaise, me.stack / 5);
