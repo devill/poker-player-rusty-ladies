@@ -19,10 +19,10 @@ class Player {
   }
 
   static betRequest(gameState, bet) {
+    console.log('here');
     try {
       let me = gameState.players[gameState.in_action];
       let holeCards = me.hole_cards;
-      let isPair = holeCards[0].rank === holeCards[1].rank;
       let countOutPlayers = gameState.players.filter(player => player.status === 'out').length;
       let mid = (gameState.dealer + 1 + countOutPlayers) === gameState.in_action;
       let late = (gameState.dealer + 2 + countOutPlayers) === gameState.in_action;
