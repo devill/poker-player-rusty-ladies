@@ -38,6 +38,8 @@ class Player {
 
       let communityMatchingHigh = gameState.comunity_cards.filter(card => toValue(card.rank) === highestCard).length;
       let communityMatchingLow = gameState.comunity_cards.filter(card => toValue(card.rank) === lowestCard).length;
+      let card1MatchingSuite = gameState.comunity_cards.filter(card => card.suite === holeCards[0].suite).length;
+      let card2MatchingSuite = gameState.comunity_cards.filter(card => card.suite === holeCards[1].suite).length;
 
       function calculateChenScore(holeCards) {
         let isPair = card1 === card2;
@@ -109,7 +111,7 @@ class Player {
         positionalAdjustment = 1;
       }
 
-      let adjustedScore = chenScore + countOutPlayers - otherLargeBet + meLargeBet + communityMatchingHigh + communityMatchingLow + positionalAdjustment;
+      let adjustedScore = chenScore + countOutPlayers - otherLargeBet + meLargeBet + communityMatchingHigh + communityMatchingLow + positionalAdjustment + card1MatchingSuite + card2MatchingSuite;
 
       let b = 0;
       if (adjustedScore >= 9) {
