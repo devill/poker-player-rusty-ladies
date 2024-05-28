@@ -84,10 +84,14 @@ class Player {
         return score;
       }
 
-      let betSize = Math.floor(me.stack / 2);
+      let bigRaise = Math.floor(me.stack / 2);
       let mr = gameState.current_buy_in - me.bet + gameState.minimum_raise;
-      if(betSize < mr)
-        betSize = me.stack;
+      if(bigRaise < mr)
+        bigRaise = me.stack;
+
+      let smallRaise = gameState.current_buy_in - me.bet + gameState.minimum_raise;
+      let call = gameState.current_buy_in - me.bet;
+
 
       if( otherLargeBet === 0 && late) {
       // if( otherLargeBet === 0) {
@@ -107,7 +111,14 @@ class Player {
 
       let adjustedScore = chenScore + countOutPlayers - otherLargeBet + meLargeBet + communityMatchingHigh + communityMatchingLow + positionalAdjustment;
 
-      let b = adjustedScore >= 9 ? betSize : 0;
+      let b = 0;
+      if (adjustedScore >= 9) {
+        b = bigRaise;
+      } else if (adjustedScore >= 8) {
+        b = Math.min(smallRaise, me.stack / 5);
+      } else if (adjustedScore >= 7) {
+        b = Math.min(call, me.stack / 5);
+      }
       console.log('Early position bet', b);
       bet(b);
 
