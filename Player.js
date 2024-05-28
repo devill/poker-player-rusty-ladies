@@ -31,6 +31,14 @@ class Player {
       let meLargeBet = me.stack < me.bet ? 1 : 0;
 
 
+      let card1 = Player.toValue(holeCards[0].rank);
+      let card2 = Player.toValue(holeCards[1].rank);
+      let highestCard = Math.max(card1, card2);
+      let lowestCard = Math.min(card1, card2);
+
+      let communityMatchingHigh = gameState.comunity_cards.filter(card => toValue(card.rank) === highestCard).length;
+      let communityMatchingLow = gameState.comunity_cards.filter(card => toValue(card.rank) === lowestCard).length;
+
       function calculateChenScore(holeCards) {
         let card1 = Player.toValue(holeCards[0].rank);
         let card2 = Player.toValue(holeCards[1].rank);
@@ -94,7 +102,7 @@ class Player {
 
       let chenScore = calculateChenScore(holeCards);
 
-      let adjustedScore = chenScore + countOutPlayers - otherLargeBet + meLargeBet;
+      let adjustedScore = chenScore + countOutPlayers - otherLargeBet + meLargeBet + communityMatchingHigh + communityMatchingLow;
       if(late)
         {
           let b = adjustedScore >= 6 ? betSize : 0;
