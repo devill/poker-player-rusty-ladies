@@ -36,8 +36,8 @@ class Player {
       let highestCard = Math.max(card1, card2);
       let lowestCard = Math.min(card1, card2);
 
-      let communityMatchingHigh = gameState.community_cards.filter(card => toValue(card.rank) === highestCard).length;
-      let communityMatchingLow = gameState.community_cards.filter(card => toValue(card.rank) === lowestCard).length;
+      let communityMatchingHigh = gameState.community_cards.filter(card => Player.toValue(card.rank) === highestCard).length;
+      let communityMatchingLow = gameState.community_cards.filter(card => Player.toValue(card.rank) === lowestCard).length;
       let card1MatchingSuite = gameState.community_cards.filter(card => card.suite === holeCards[0].suite).length;
       let card2MatchingSuite = gameState.community_cards.filter(card => card.suite === holeCards[1].suite).length;
 
