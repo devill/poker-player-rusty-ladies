@@ -34,8 +34,8 @@ class Player {
       let otherAllIn = gameState.players.filter(player =>  player.name !== me.name && player.stack === 0 && player.status === 'active').length;
       let otherLargeBet = gameState.players.filter(player => player.name !== me.name && gameState.small_blind * 5 < player.bet && player.status === 'active').length;
       console.log('otherLargeBet', otherLargeBet, gameState.players);
-      //if( otherAllIn === 0 && lastToAct) {
-      if( otherLargeBet === 0) {
+      if( otherAllIn === 0 && lastToAct) {
+      // if( otherLargeBet === 0) {
         bet(10000);
         return;
       }
