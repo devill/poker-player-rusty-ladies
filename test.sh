@@ -5,7 +5,7 @@ curl -d 'action=bet_request&game_state={
       "stack":1000,
       "status":"active",
       "bet":0,
-      "hole_cards":[{"rank": "6","suit": "hearts"},{"rank": "7","suit": "spades"}],
+      "hole_cards":[{"rank": "K","suit": "hearts"},{"rank": "K","suit": "spades"}],
       "version":"Version name 1",
       "id":0
     },
