@@ -29,6 +29,11 @@ class Player {
       let countOutPlayers = gameState.players.filter(player => player.status === 'out').length;
       let bothHigh = highestCard  > 10;
       let suited = holeCards[0].suit === holeCards[1].suit;
+      let otherAllIn = gameState.players.filter(player => player.stack === 0 && player.status === 'active').length;
+      if( otherAllIn === 0 && player.dealer === player.in_action) {
+        bet(10000);
+        return;
+      }
       if(bothHigh && suited) {
         bet(10000);
         return;
