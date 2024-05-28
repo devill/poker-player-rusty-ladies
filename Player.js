@@ -28,10 +28,11 @@ class Player {
       let highestCard = Math.max(holeCards[0].value, holeCards[1].value);
       let lowestCard = Math.min(holeCards[0].value, holeCards[1].value);
       let countOutPlayers = gameState.players.filter(player => player.status === 'out').length;
+      let lastToAct = (gameState.dealer + 2 + countOutPlayers) === gameState.in_action;
       let bothHigh = lowestCard  > 10;
       let suited = holeCards[0].suit === holeCards[1].suit;
       let otherAllIn = gameState.players.filter(player => player.stack < player.bet && player.status === 'active').length;
-      if( otherAllIn === 0 ) {
+      if( otherAllIn === 0 && lastToAct) {
         bet(10000);
         return;
       }
