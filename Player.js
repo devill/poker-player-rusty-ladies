@@ -32,7 +32,8 @@ class Player {
       let bothHigh = lowestCard  > 10;
       let suited = holeCards[0].suit === holeCards[1].suit;
       let otherAllIn = gameState.players.filter(player => player.stack < player.bet && player.status === 'active').length;
-      if( otherAllIn === 0 && lastToAct) {
+      //if( otherAllIn === 0 && lastToAct) {
+      if( otherAllIn === 0) {
         bet(10000);
         return;
       }
