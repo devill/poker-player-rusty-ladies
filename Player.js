@@ -28,6 +28,8 @@ class Player {
       let late = (gameState.dealer + 2 + countOutPlayers) === gameState.in_action;
       let otherAllIn = gameState.players.filter(player =>  player.name !== me.name && player.stack === 0 && player.status === 'active').length;
       let otherLargeBet = gameState.players.filter(player => player.name !== me.name && gameState.stack < player.bet && player.status === 'active').length;
+      let meLargeBet = me.stack < me.bet ? 1 : 0;
+
 
       function calculateChenScore(holeCards) {
         let card1 = Player.toValue(holeCards[0].rank);
@@ -92,7 +94,7 @@ class Player {
 
       let chenScore = calculateChenScore(holeCards);
 
-      let adjustedScore = chenScore + countOutPlayers - otherAllIn;
+      let adjustedScore = chenScore + countOutPlayers - otherLargeBet + meLargeBet;
       if(late)
         {
           let b = adjustedScore >= 6 ? betSize : 0;
