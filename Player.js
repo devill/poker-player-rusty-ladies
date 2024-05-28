@@ -27,7 +27,7 @@ class Player {
       let mid = (gameState.dealer + 1 + countOutPlayers) === gameState.in_action;
       let late = (gameState.dealer + 2 + countOutPlayers) === gameState.in_action;
       let otherAllIn = gameState.players.filter(player =>  player.name !== me.name && player.stack === 0 && player.status === 'active').length;
-      let otherLargeBet = gameState.players.filter(player => player.name !== me.name && gameState.small_blind * 5 < player.bet && player.status === 'active').length;
+      let otherLargeBet = gameState.players.filter(player => player.name !== me.name && gameState.small_blind * 20 < player.bet && player.status === 'active').length;
 
       function calculateChenScore(holeCards) {
         let card1 = Player.toValue(holeCards[0].rank);
