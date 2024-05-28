@@ -95,19 +95,19 @@ class Player {
       let adjustedScore = chenScore + countOutPlayers - otherAllIn;
       if(late)
         {
-          let b = adjustedScore >= 7 ? betSize : 0;
+          let b = adjustedScore >= 6 ? betSize : 0;
           console.log('Late position bet', b);
           bet(b);
         }
       else if(mid)
         {
-          let b = adjustedScore >= 9 ? betSize : 0;
+          let b = adjustedScore >= 8 ? betSize : 0;
           console.log('Mid position bet', b);
           bet(b);
         }
       else
         {
-          let b = adjustedScore >= 10 ? betSize : 0;
+          let b = adjustedScore >= 9 ? betSize : 0;
           console.log('Early position bet', b);
           bet(b);
         }
