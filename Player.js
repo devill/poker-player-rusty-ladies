@@ -87,12 +87,13 @@ class Player {
 
       let chenScore = calculateChenScore(holeCards);
 
+      let adjustedScore = chenScore + countOutPlayers - otherAllIn * 2;
       if(late)
-        bet(chenScore >= 7 - countOutPlayers ? 10000 : 0);
+        bet(adjustedScore >= 7 ? 10000 : 0);
       else if(mid)
-        bet(chenScore >= 9 - countOutPlayers ? 10000 : 0);
+        bet(adjustedScore >= 9 ? 10000 : 0);
       else
-        bet(chenScore >= 10 - countOutPlayers ? 10000 : 0);
+        bet(adjustedScore >= 10 ? 10000 : 0);
     } catch (e) {
       console.error(e);
       bet(0);
