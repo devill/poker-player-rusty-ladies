@@ -4,7 +4,10 @@ class Player {
   }
 
   static betRequest(gameState, bet) {
-    bet(10000);
+    let me = gameState.players[gameState.in_action];
+    let holeCards = me.hole_cards;
+    let isPair = holeCards[0].rank === holeCards[1].rank;
+    bet(isPair ? 10000 : 0);
   }
 
   static showdown(gameState) {
