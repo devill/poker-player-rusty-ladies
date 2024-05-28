@@ -91,7 +91,7 @@ class Player {
 
       let chenScore = calculateChenScore(holeCards);
 
-      let adjustedScore = chenScore + countOutPlayers - otherAllIn * 2;
+      let adjustedScore = chenScore + countOutPlayers - otherAllIn;
       if(late)
         bet(adjustedScore >= 7 ? betSize : 0);
       else if(mid)
