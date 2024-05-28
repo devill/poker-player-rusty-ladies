@@ -26,8 +26,9 @@ class Player {
       holeCards[0].value = Player.toValue(holeCards[0].rank);
       holeCards[1].value = Player.toValue(holeCards[1].rank);
       let highestCard = Math.max(holeCards[0].value, holeCards[1].value);
+      let lowestCard = Math.min(holeCards[0].value, holeCards[1].value);
       let countOutPlayers = gameState.players.filter(player => player.status === 'out').length;
-      let bothHigh = highestCard  > 10;
+      let bothHigh = lowestCard  > 10;
       let suited = holeCards[0].suit === holeCards[1].suit;
       let otherAllIn = gameState.players.filter(player => player.stack === 0 && player.status === 'active').length;
       if( otherAllIn === 0 && player.dealer === player.in_action) {
