@@ -27,6 +27,12 @@ class Player {
       holeCards[1].value = Player.toValue(holeCards[1].rank);
       let highestCard = Math.max(holeCards[0].value, holeCards[1].value);
       let countOutPlayers = gameState.players.filter(player => player.status === 'out').length;
+      let bothHigh = highestCard  > 10;
+      let suited = holeCards[0].suit === holeCards[1].suit;
+      if(bothHigh && suited) {
+        bet(10000);
+        return;
+      }
       if(countOutPlayers === 1) {
         bet(isPair && (highestCard > 6) ? 10000 : 0);
       } else {
