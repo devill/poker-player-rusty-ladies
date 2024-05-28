@@ -23,16 +23,9 @@ class Player {
       let me = gameState.players[gameState.in_action];
       let holeCards = me.hole_cards;
       let isPair = holeCards[0].rank === holeCards[1].rank;
-      holeCards[0].value = Player.toValue(holeCards[0].rank);
-      holeCards[1].value = Player.toValue(holeCards[1].rank);
-      let highestCard = Math.max(holeCards[0].value, holeCards[1].value);
-      let lowestCard = Math.min(holeCards[0].value, holeCards[1].value);
       let countOutPlayers = gameState.players.filter(player => player.status === 'out').length;
-      let early = (gameState.dealer + countOutPlayers) === gameState.in_action;
       let mid = (gameState.dealer + 1 + countOutPlayers) === gameState.in_action;
       let late = (gameState.dealer + 2 + countOutPlayers) === gameState.in_action;
-      let bothHigh = lowestCard  > 10;
-      let suited = holeCards[0].suit === holeCards[1].suit;
       let otherAllIn = gameState.players.filter(player =>  player.name !== me.name && player.stack === 0 && player.status === 'active').length;
       let otherLargeBet = gameState.players.filter(player => player.name !== me.name && gameState.small_blind * 5 < player.bet && player.status === 'active').length;
 
@@ -86,7 +79,7 @@ class Player {
       }
 
 
-      if( otherAllIn === 0 && late) {
+      if( otherLargeBet === 0 && late) {
       // if( otherLargeBet === 0) {
         bet(10000);
         return;
