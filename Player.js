@@ -98,25 +98,19 @@ class Player {
 
       let chenScore = calculateChenScore(holeCards);
 
-      let adjustedScore = chenScore + countOutPlayers - otherLargeBet + meLargeBet + communityMatchingHigh + communityMatchingLow;
-      if(late)
-        {
-          let b = adjustedScore >= 6 ? betSize : 0;
-          console.log('Late position bet', b);
-          bet(b);
-        }
-      else if(mid)
-        {
-          let b = adjustedScore >= 8 ? betSize : 0;
-          console.log('Mid position bet', b);
-          bet(b);
-        }
-      else
-        {
-          let b = adjustedScore >= 9 ? betSize : 0;
-          console.log('Early position bet', b);
-          bet(b);
-        }
+      let positionalAdjustment = 0;
+      if(late) {
+        positionalAdjustment = 3;
+      } else if (mid) {
+        positionalAdjustment = 1;
+      }
+
+      let adjustedScore = chenScore + countOutPlayers - otherLargeBet + meLargeBet + communityMatchingHigh + communityMatchingLow + positionalAdjustment;
+
+      let b = adjustedScore >= 9 ? betSize : 0;
+      console.log('Early position bet', b);
+      bet(b);
+
     } catch (e) {
       console.error(e);
       bet(0);
